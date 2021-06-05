@@ -36,20 +36,24 @@ function onSearch(e) {
     }
     if(countries.length <= 10 && countries.length > 1) {
       createList(countries);
+      return;
     }
     if(countries.length === 1) {
       createCard(countries);
+      return;
     }
   })
   .catch(onFetchError);
 }
 
 function createList(countries) {
-  listContainer.innerHTML = listTpl(countries);
+  const countriesList = listTpl(countries);
+  listContainer.innerHTML = countriesList;
 }
 
 function createCard(country) {
-  listContainer.innerHTML = cardTpl(country);
+  const countryCardMurkup = cardTpl(country);
+  listContainer.innerHTML = countryCardMurkup;
 }
 
 function resetPage() {
