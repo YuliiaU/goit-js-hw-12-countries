@@ -13,8 +13,8 @@ search.addEventListener('input', debounce(onSearch, 500));
 
 function onSearch(e) {
 
-  resetPage();
-
+ 
+updatePage();
   const searchQuery = e.target.value;
 
   fetchCountries(searchQuery)
@@ -35,29 +35,21 @@ function onSearch(e) {
       });
     }
     if(countries.length <= 10 && countries.length > 1) {
-      createList(countries);
+     
+      updatePage(listTpl(countries));
       return;
     }
     if(countries.length === 1) {
-      createCard(countries);
+     
+      updatePage(cardTpl(countries));
       return;
     }
   })
   .catch(onFetchError);
 }
 
-function createList(countries) {
-  const countriesList = listTpl(countries);
-  listContainer.innerHTML = countriesList;
-}
-
-function createCard(country) {
-  const countryCardMurkup = cardTpl(country);
-  listContainer.innerHTML = countryCardMurkup;
-}
-
-function resetPage() {
-  listContainer.innerHTML = '';
+function updatePage(markup = "") {
+listContainer.innerHTML = markup;
 }
 
 function onFetchError(err) {
